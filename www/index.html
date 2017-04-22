@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>點名小幫手</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+	<link rel="stylesheet" href="css/framework7-icons.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="css/my-app.css">
+</head>
+
+<body onload="init()">
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+		<form name="left-form" id="left-form">
+        <div class="list-block">
+			<ul>
+			<li>
+				<p>群組資料</p>
+			</li>
+			<li>
+				<div class="item-content">
+					<div class="item-inner">
+					<div class="item-input">
+						<input type="tel" name="lf-dist" id="lf-dist" placeholder="小區序號">
+					</div>
+					</div>
+				</div>
+			
+			</li>
+			<li>
+				<div class="item-content">
+					<div class="item-inner">
+					<div class="item-input">
+						<input type="text" name="lf-name" id="lf-name" placeholder="小排名稱">
+					</div>
+					</div>
+				</div>			
+			</li>
+			<li>
+				<div class="item-content">
+					<div class="item-inner">
+					<div class="item-input">
+						<input type="text" name="lf-other" id="lf-other" placeholder="活力小組">
+					</div>
+					</div>
+				</div>			
+			</li>
+			<li>
+				<div class="item-content">
+					<div class="item-inner">
+					<div class="item-input">
+						<input type="date" name="lf-date" id="lf-date" placeholder="日期範圍">
+					</div>
+					</div>
+				</div>			
+			</li>
+			
+        </div>
+		</form>
+		<div class="content-block">
+				<a href="#" class="button button-big left-form-to-data close-panel" style="60%">儲存</a>
+		</div>
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+
+					<div class="left">
+						<a href="#" class="link icon-only open-panel"><i class="f7-icons gear"></i></a>
+                        <a href="#" class="link icon-only" onclick="resetStatButton()"><i class="f7-icons refresh"></i></a>
+                    </div>                    
+                    <div class="center sliding">點名小幫手</div>
+					<div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+						<a href="#" class="link icon-only"><i class="f7-icons share"></i></a>
+                        <a href="#" class="link icon-only" onclick="onClickSort()"><i class="f7-icons sort"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="content-block">
+                            <p>
+							<table id="check">
+								<tr>
+									<th style="width:5%">No</th>
+									<th style="width:25%">姓名</th> 
+									<th style="width:10%">主日</th>
+									<th style="width:10%">禱告</th>
+									<th style="width:10%">家聚</th>
+									<th style="width:10%">小排</th>
+									<th style="width:10%">福音</th>
+									<th style="width:10%">晨興</th>
+								</tr>
+								<!--以下測試用-->
+								<tr>
+									<td>1</td>
+									<td><div class='nameL' id="namelist1">曾得聖</div></td> 
+									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="lord1">主</a></td>
+									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="pray1">禱</a></td>
+									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="home1">家</a></td>
+									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="group1">排</a></td>
+									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="gospel1">福</a></td>
+									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="meet1">晨</a></td>
+								</tr>
+								<tr>
+									<td>523</td>
+									<td><div class='nameL' id="namelist2">蕭簡程恢</div></td> 
+									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="lord2">主</a></td>
+									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="pray2">禱</a></td>
+									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="home2">家</a></td>
+									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="group2">排</a></td>
+									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="gospel2">福</a></td>
+									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="meet2">晨</a></td>
+								</tr>
+								<!--以上測試用-->
+							
+							</table>						
+							
+							
+							</p>
+                            <!-- Link to another page -->
+                            <a href="addNewP.html" class="button" id="addNP">新增名單</a>
+                        </div>
+		<!--				<div class="list-block">
+						<ul>
+						<li>
+							<div class="item-content">
+							<div class="item-inner">
+							
+							
+									<div class="rh col-5">No.</div>
+									<div class="rh col-25">姓名</div> 
+									<div class="rh col-10">主日</div>
+									<div class="rh col-10">禱告</div>
+									<div class="rh col-10">家聚</div>
+									<div class="rh col-10">小排</div>
+									<div class="rh col-10">福音</div>
+									<div class="rh col-10">送會</div>
+
+							</div>
+							</div>
+						</li> 
+					<li>
+							
+							<div class="item-content">
+							<div class="item-inner">
+							
+							<div class="rh col-5">1</div>
+							<div class="rh col-10 tablet-20">高新綸</div> 
+							<div class="rh col-10"><a href="#" class="button" >主</a></div>
+							<div class="rh col-10"><a href="#" class="button" >禱</a></div>
+							<div class="rh col-10"><a href="#" class="button" >家</a></div>
+							<div class="rh col-10"><a href="#" class="button" >排</a></div>
+							<div class="rh col-10"><a href="#" class="button" >福</a></div>
+							<div class="rh col-10"><a href="#" class="button" >送</a></div>
+							
+							</div>
+							</div>							
+							
+						</li>
+					<li>
+
+							<div class="item-content row no-gutter">
+							<div class="item-inner">
+							
+							<div class="rh col-5">1342</div>
+							<div class="rh col-10 tablet-20">高陳純映</div> 
+							<div class="rh col-10"><a href="#" class="button" >主</a></div>
+							<div class="rh col-10"><a href="#" class="button" >禱</a></div>
+							<div class="rh col-10"><a href="#" class="button" >家</a></div>
+							<div class="rh col-10"><a href="#" class="button" >排</a></div>
+							<div class="rh col-10"><a href="#" class="button" >福</a></div>
+							<div class="rh col-10"><a href="#" class="button" >送</a></div>
+							
+							</div>
+							</div>
+					</li>
+
+					</ul>
+						</div> -->
+						
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+                    <a href="#">台南市召會Ⓒ2017</a>
+                    <a href="#" class="link icon-only" onclick="showAlert()"><i class="f7-icons help"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript "src="notification.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+</body>
+
+</html>
+		
+		<!-- 排序:手拉、客制、 -->
+		
+		<!-- 背景
+		自動儲存 -->
+		
+		
+		
+		<!-- 加人+小分頁
+		編號 姓名 -->
