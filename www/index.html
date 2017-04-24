@@ -117,7 +117,7 @@
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
 						<a href="#" class="link icon-only"><i class="f7-icons share" ontouchstart="onTouchshare()"></i></a>
-                        <a href="#" class="link icon-only" onclick="onClickSort()"><i class="f7-icons sort"></i></a>
+                        <a href="#" class="link icon-only" ><i class="f7-icons swap" id="icon-sort"></i></a>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                         <div class="content-block">
                             <p>
 							<table id="check">
-								<tr>
+								<tr id="header">
 									<th style="width:5%">No</th>
 									<th style="width:25%">姓名</th> 
 									<th style="width:10%">主日</th>
@@ -141,22 +141,22 @@
 									<th style="width:10%">晨興</th>
 								</tr>
 								<!--以下測試用-->
-								<tr>
-									<td>1</td>
+								<tr id="r1">
+									<td><div class='numberL sorthide' id ="numberL1">1</div></td>
 									<td><div class='nameL' id="namelist1">曾得聖</div></td> 
-									<td><a href="#" class="button stat active" id="lord1">主</a></td>
-									<td><a href="#" class="button stat" id="pray1">禱</a></td>
-									<td><a href="#" class="button stat" id="home1">家</a></td>
+									<td><a href="#" class="button stat sorthide" id="lord1">主</a><i class="f7-icons arrow-upward sort" id="up1" style="display:none"></i></td>
+									<td><a href="#" class="button stat sorthide" id="pray1">禱</a><i class="f7-icons arrow-downward sort" id="down1" style="display:none"></i></td>
+									<td><a href="#" class="button stat" id="home1">家</a><i class="f7-icons delete sort" id="delete1" style="display:none"></i></td>
 									<td><a href="#" class="button stat" id="group1">排</a></td>
 									<td><a href="#" class="button stat" id="gospel1">福</a></td>
 									<td><a href="#" class="button stat" id="meet1">晨</a></td>
 								</tr>
-								<tr>
-									<td>523</td>
+								<tr id="r2">
+									<td><div class='numberL sorthide' id ="numberL2">523</div></td>
 									<td><div class='nameL' id="namelist2">蕭簡程恢</div></td> 
-									<td><a href="#" class="button stat" id="lord2">主</a></td>
-									<td><a href="#" class="button stat" id="pray2">禱</a></td>
-									<td><a href="#" class="button stat" id="home2">家</a></td>
+									<td><a href="#" class="button stat sorthide" id="lord2">主</a><i class="f7-icons arrow-upward sort" id="up2" style="display:none"></i></td>
+									<td><a href="#" class="button stat sorthide" id="pray2">禱</a><i class="f7-icons arrow-downward sort" id="down2" style="display:none"></i></td>
+									<td><a href="#" class="button stat" id="home2">家</a><i class="f7-icons delete sort" id="delete1" style="display:none"></i></td>
 									<td><a href="#" class="button stat" id="group2">排</a></td>
 									<td><a href="#" class="button stat" id="gospel2">福</a></td>
 									<td><a href="#" class="button stat" id="meet2">晨</a></td>
@@ -235,7 +235,7 @@
             <div class="toolbar">
                 <div class="toolbar-inner">
                     <!-- Toolbar links -->
-                    <a href="#">台南市召會Ⓒ2017</a>
+                    <a href="about.html">台南市召會Ⓒ2017</a>
                     <a href="#" class="link icon-only" id="icon-help" ><i class="f7-icons help"></i></a>
                 </div>
             </div>

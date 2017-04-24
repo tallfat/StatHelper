@@ -14,7 +14,7 @@
     </div>
 </div>
 <div class="pages">
-    <div data-page="form" class="page">
+    <div data-page="addNewP" class="page">
         <div class="page-content">
 
 			<div class="content-block-title">新增聖徒個人資訊</div>
@@ -28,12 +28,12 @@
 						<div class="item-media"><i class="icon f7-icons">#<sub>#</sub></i></div>
 						<div class="item-inner">
 						  <div class="item-input">
-							<input type="tel" name="number" id="addNumber" placeholder="編號">
-						  </div>
+							<input type="tel" name="number" id="addNumber" placeholder="編號(選填)" maxlength="3">
+							</div>
 						</div>
 					  </div>
 					</li> 
-
+					
 					<li>
 					  <div class="item-content">
 						<div class="item-media"><i class="icon f7-icons person"></i></div>
@@ -55,7 +55,7 @@
 				</div>
 				</form> 
 				<div class="content-block">
-				<a href="#" class="button button-big form-to-data" style="60%" onclick="addNewPerson()">
+				<a href="#" class="button button-big form-to-data" id="saveNameList">
 				<!--
 				"adNewPersonmyApp.alert('hear'); var formData = myApp.formToData('#my-form'); myApp.alert(JSON.stringify(formData));
 				"-->
