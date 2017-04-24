@@ -18,7 +18,31 @@ myApp.onPageInit('about', function (page) {
     });
 });
 
+// myApp.onPageInit('index', function (page) {
+    ////run createContentPage func after link was clicked
+    // $$('#icon-refresh').on('click', function () {
+        // resetStatButton();
+    // });
+	// $$('.icon-refresh').on('click', function () {
+        // resetStatButton();
+    // });
+	// $$('.stat').on('click', function () {
+        // clickStatButton(this);
+    // });
+	// $$("#icon-help").on('tap click touchstart',showHelp());
+// });
+
 document.addEventListener("deviceready", onDeviceReady, false);
+
+$$('#icon-refresh').on('click', function () {
+    resetStatButton();
+});
+$$('.stat').on('click', function () {
+        clickStatButton(this);
+});
+$$("#icon-help").on('tap click touchstart',function(){
+	showHelp();
+});
 
 function onDeviceReady() {
 		console.log(navigator.notification);
@@ -102,12 +126,17 @@ function addNewPerson() {
 		cell2.innerHTML = "<div class='nameL' id='namelist"+rows+"'>"+"朋友"+rows+"</div>";
 	}
 	
-	cell3.innerHTML = "<a href='#' class='button stat' onclick='clickStatButton(this)' id='lord"+rows+"'>主</a>";
-	cell4.innerHTML = "<a href='#' class='button stat' onclick='clickStatButton(this)' id='pray"+rows+"'>禱</a>";
-	cell5.innerHTML = "<a href='#' class='button stat' onclick='clickStatButton(this)' id='home"+rows+"'>家</a>";
-	cell6.innerHTML = "<a href='#' class='button stat' onclick='clickStatButton(this)' id='group"+rows+"'>排</a>";
-	cell7.innerHTML = "<a href='#' class='button stat' onclick='clickStatButton(this)' id='gospel"+rows+"'>福</a>";
-	cell8.innerHTML = "<a href='#' class='button stat' onclick='clickStatButton(this)' id='meet"+rows+"'>晨</a>";
+	cell3.innerHTML = "<a href='#' class='button stat' id='lord"+rows+"'>主</a>";
+	cell4.innerHTML = "<a href='#' class='button stat' id='pray"+rows+"'>禱</a>";
+	cell5.innerHTML = "<a href='#' class='button stat' id='home"+rows+"'>家</a>";
+	cell6.innerHTML = "<a href='#' class='button stat' id='group"+rows+"'>排</a>";
+	cell7.innerHTML = "<a href='#' class='button stat' id='gospel"+rows+"'>福</a>";
+	cell8.innerHTML = "<a href='#' class='button stat' id='meet"+rows+"'>晨</a>";
+	
+	var statBut = document.getElementsByClassName("stat");
+	for (var i = 0; i<statButtons.length; i++) {
+		statBut[i].addEventListener('onclick',clickStatButton(this));
+	}
 	
 	myApp.alert("是否要繼續新增名單？", "新增\""+strip(cell2.innerHTML)+"\"成功！", function () {
         myApp.alert('You clicked Ok button');
@@ -132,6 +161,7 @@ function strip(html)
    tmp.innerHTML = html;
    return tmp.textContent||tmp.innerText||"";
 }
+
 
 
 function clickStatButton(elem) {
@@ -175,7 +205,7 @@ document.write(today);
 var bA = document.getElementById("addNP");
 bA.addEventListener("onclick", 
 		navigator.notification.alert(
-            'You are the winner!',  // message
+            'addNP!',  // message
             alertDismissed,         // callback
             'Game Over',            // title
             'Done'                  // buttonName
@@ -184,23 +214,39 @@ bA.addEventListener("onclick",
 //$("#addNP").click(function () { alert("jQmessage"); });
 
 function onClickSort(){
-	myApp.alert('test');
+	myApp.alert('clicksort');
 	navigator.notification.alert(
-		'You are the winner!',  // message
+		'SORT',  // message
 		alertDismissed,         // callback
-		'Game Over',            // title
+		'title',            // title
 		'Done'                  // buttonName
 	);
 }
 
-function showAlert() {
+function onTouchshare(){
+	myApp.alert('touchshare');
+	navigator.notification.alert(
+		'touch',  // message
+		alertDismissed,         // callback
+		'title',            // title
+		'Done'                  // buttonName
+	);
+}
+
+function showHelp() {
       navigator.notification.alert(
        'Message box please display....', // message
-       altertDismissed,             // no callback
+       alertDismissed,             // no callback
        'Message Box Title',         // title
        'Continue'                   // button texr
     );
     }
-function  altertDismissed(){
-       navigator.notification.alert("alert box is dismissed");
+function  alertDismissed(){
+       //navigator.notification.alert("alert box is dismissed");
 	}
+	
+$$(".share").on('tap click touchstart',alertDismissed);
+
+function onDeviceReady() {
+		console.log(navigator.notification);
+}

@@ -30,12 +30,15 @@
     <link rel="stylesheet" href="css/framework7.ios.min.css">
     <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
 	<link rel="stylesheet" href="css/framework7-icons.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"> -->
     <link rel="stylesheet" href="css/my-app.css">
+	<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" /> -->
+	<!-- <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+	<!-- <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 </head>
 
-<body onload="init()">
+<body>
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
 
@@ -105,7 +108,7 @@
 
 					<div class="left">
 						<a href="#" class="link icon-only open-panel"><i class="f7-icons gear"></i></a>
-                        <a href="#" class="link icon-only" onclick="resetStatButton()"><i class="f7-icons refresh"></i></a>
+                        <a href="#" class="link icon-only" id="icon-refresh"><i class="f7-icons refresh"></i></a>
                     </div>                    
                     <div class="center sliding">點名小幫手</div>
 					<div class="right">
@@ -113,7 +116,7 @@
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
-						<a href="#" class="link icon-only"><i class="f7-icons share"></i></a>
+						<a href="#" class="link icon-only"><i class="f7-icons share" ontouchstart="onTouchshare()"></i></a>
                         <a href="#" class="link icon-only" onclick="onClickSort()"><i class="f7-icons sort"></i></a>
                     </div>
                 </div>
@@ -141,22 +144,22 @@
 								<tr>
 									<td>1</td>
 									<td><div class='nameL' id="namelist1">曾得聖</div></td> 
-									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="lord1">主</a></td>
-									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="pray1">禱</a></td>
-									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="home1">家</a></td>
-									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="group1">排</a></td>
-									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="gospel1">福</a></td>
-									<td><a href="#" class="button stat"onclick='clickStatButton(this)'  id="meet1">晨</a></td>
+									<td><a href="#" class="button stat active" id="lord1">主</a></td>
+									<td><a href="#" class="button stat" id="pray1">禱</a></td>
+									<td><a href="#" class="button stat" id="home1">家</a></td>
+									<td><a href="#" class="button stat" id="group1">排</a></td>
+									<td><a href="#" class="button stat" id="gospel1">福</a></td>
+									<td><a href="#" class="button stat" id="meet1">晨</a></td>
 								</tr>
 								<tr>
 									<td>523</td>
 									<td><div class='nameL' id="namelist2">蕭簡程恢</div></td> 
-									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="lord2">主</a></td>
-									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="pray2">禱</a></td>
-									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="home2">家</a></td>
-									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="group2">排</a></td>
-									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="gospel2">福</a></td>
-									<td><a href="#" class="button stat" onclick='clickStatButton(this)' id="meet2">晨</a></td>
+									<td><a href="#" class="button stat" id="lord2">主</a></td>
+									<td><a href="#" class="button stat" id="pray2">禱</a></td>
+									<td><a href="#" class="button stat" id="home2">家</a></td>
+									<td><a href="#" class="button stat" id="group2">排</a></td>
+									<td><a href="#" class="button stat" id="gospel2">福</a></td>
+									<td><a href="#" class="button stat" id="meet2">晨</a></td>
 								</tr>
 								<!--以上測試用-->
 							
@@ -233,7 +236,7 @@
                 <div class="toolbar-inner">
                     <!-- Toolbar links -->
                     <a href="#">台南市召會Ⓒ2017</a>
-                    <a href="#" class="link icon-only" onclick="showAlert()"><i class="f7-icons help"></i></a>
+                    <a href="#" class="link icon-only" id="icon-help" ><i class="f7-icons help"></i></a>
                 </div>
             </div>
         </div>
